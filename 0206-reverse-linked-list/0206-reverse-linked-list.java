@@ -9,22 +9,28 @@
  * }
  */
 class Solution {
+    static ListNode ptr=null;
     public ListNode reverseList(ListNode head) {
-        if(head==null||head.next==null)
+        if(head==null||head.next==null){
             return head;
-        ListNode prev=null;
-        ListNode curr=head;
-        ListNode temp=head.next;
-        while(curr!=null){
-            curr.next=prev;
-            prev=curr;
-            curr=temp;
-            if(temp==null){
-                return prev;
-            }
-            temp=temp.next;
         }
-        return prev;
-    
+        ListNode ans=new ListNode(0);
+        reverseLL(head,ans);
+        return ans.next;
+        
+       
+    }
+    private ListNode reverseLL(ListNode head,ListNode ans){
+        if(head.next==null){
+            ans.next=head;
+            return head;
+        }
+        ListNode store=reverseLL(head.next,ans);
+        System.out.println(store.val+""+head.val);
+        
+        store.next=head;
+        head.next=null;
+        store=head;
+        return head;
     }
 }
