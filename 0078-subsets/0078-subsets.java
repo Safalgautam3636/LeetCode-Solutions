@@ -7,15 +7,17 @@ class Solution {
         return ans;
 
     }
-    public void recu(int[]input,List<Integer>eachInstance,List<List<Integer>>ans,int i){
+    public void recu(int[]input,List<Integer>include,List<List<Integer>>ans,int i){
         if(i==input.length){
-            ans.add(eachInstance);
+            ans.add(new ArrayList(include));
             return;
         }
-        List<Integer>include=new ArrayList(eachInstance);
-        List<Integer>exclude=new ArrayList(eachInstance);
         include.add(input[i]);
+        
         recu(input,include,ans,i+1);
-        recu(input,exclude,ans,i+1);
+        
+        include.remove(include.size()-1);
+        
+        recu(input,include,ans,i+1);
     }
 }
