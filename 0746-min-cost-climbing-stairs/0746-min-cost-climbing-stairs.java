@@ -7,6 +7,6 @@ class Solution {
         for(int i=costnew.length-3;i>=0;i--){
             costnew[i]+=Math.min(costnew[i+1],costnew[i+2]);
         }
-        return (int)Math.min(costnew[0],costnew[1]);
+        return Math.min(costnew[0],costnew[1]);
     }
 }
