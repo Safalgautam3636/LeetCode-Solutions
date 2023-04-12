@@ -37,52 +37,6 @@ class Solution {
         return sb.reverse().toString();
         
     }
-    String findSuperSubs(String str1,String str2,String lcs){
-        int first=0,second=0,third=0;
-        String ans="";
-        while(first<=str1.length()-1&&second<=str2.length()-1&&third<=lcs.length()-1){
-            if(str1.charAt(first)==str2.charAt(second)&&str1.charAt(first)==lcs.charAt(third)){
-                ans+=str1.charAt(first);
-                first++;
-                second++;
-                third++;
-            }
-            else if(str1.charAt(first)==str2.charAt(second)&&str1.charAt(first)!=lcs.charAt(third)){
-                ans+=lcs.charAt(third);
-                third++;
-            }
-            else if(str1.charAt(first)==lcs.charAt(third)&&str1.charAt(first)!=str2.charAt(second)){
-                ans+=str2.charAt(second);
-                second++;
-            }
-            else if(str2.charAt(second)==lcs.charAt(third)&&str2.charAt(second)!=str1.charAt(first)){
-                ans+=str1.charAt(first);
-               first++;
-            }
-        }
-        while(first<=str1.length()-1&&second<=str2.length()-1){
-            if(str1.charAt(first)==str2.charAt(second)){
-                ans+=str1.charAt(first);
-                first++;
-                second++;
-            }
-            else if(str1.charAt(first)!=str2.charAt(second)){
-                ans+=str1.charAt(first);
-                first++;
-            }
-        }
-        if(first<=str1.length()-1){
-            ans+=str1.substring(first);
-        }
-        if(second<=str2.length()-1){
-            ans+=str2.substring(second);
-        }
-        
-        
-        return ans;
-    }
-    
-    
     int lcs(String str1,String str2,int n,int m,int [][]dp){
         for(int i=0;i<n+1;i++){
             for(int j=0;j<m+1;j++){
