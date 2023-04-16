@@ -24,8 +24,17 @@ class Solution {
         if(root==null){
             return;
         }
-        inorder(root.left,ans);
-        ans.add(root.val);
-        inorder(root.right,ans);
+        Stack<TreeNode>stack=new Stack<>();
+        while(stack.isEmpty()==false||root!=null){
+            if(root==null){
+                root=stack.pop();
+                ans.add(root.val);
+                root=root.right;
+            }
+            else{
+                stack.push(root);
+                root=root.left;
+            }
+        }
     }
 }
