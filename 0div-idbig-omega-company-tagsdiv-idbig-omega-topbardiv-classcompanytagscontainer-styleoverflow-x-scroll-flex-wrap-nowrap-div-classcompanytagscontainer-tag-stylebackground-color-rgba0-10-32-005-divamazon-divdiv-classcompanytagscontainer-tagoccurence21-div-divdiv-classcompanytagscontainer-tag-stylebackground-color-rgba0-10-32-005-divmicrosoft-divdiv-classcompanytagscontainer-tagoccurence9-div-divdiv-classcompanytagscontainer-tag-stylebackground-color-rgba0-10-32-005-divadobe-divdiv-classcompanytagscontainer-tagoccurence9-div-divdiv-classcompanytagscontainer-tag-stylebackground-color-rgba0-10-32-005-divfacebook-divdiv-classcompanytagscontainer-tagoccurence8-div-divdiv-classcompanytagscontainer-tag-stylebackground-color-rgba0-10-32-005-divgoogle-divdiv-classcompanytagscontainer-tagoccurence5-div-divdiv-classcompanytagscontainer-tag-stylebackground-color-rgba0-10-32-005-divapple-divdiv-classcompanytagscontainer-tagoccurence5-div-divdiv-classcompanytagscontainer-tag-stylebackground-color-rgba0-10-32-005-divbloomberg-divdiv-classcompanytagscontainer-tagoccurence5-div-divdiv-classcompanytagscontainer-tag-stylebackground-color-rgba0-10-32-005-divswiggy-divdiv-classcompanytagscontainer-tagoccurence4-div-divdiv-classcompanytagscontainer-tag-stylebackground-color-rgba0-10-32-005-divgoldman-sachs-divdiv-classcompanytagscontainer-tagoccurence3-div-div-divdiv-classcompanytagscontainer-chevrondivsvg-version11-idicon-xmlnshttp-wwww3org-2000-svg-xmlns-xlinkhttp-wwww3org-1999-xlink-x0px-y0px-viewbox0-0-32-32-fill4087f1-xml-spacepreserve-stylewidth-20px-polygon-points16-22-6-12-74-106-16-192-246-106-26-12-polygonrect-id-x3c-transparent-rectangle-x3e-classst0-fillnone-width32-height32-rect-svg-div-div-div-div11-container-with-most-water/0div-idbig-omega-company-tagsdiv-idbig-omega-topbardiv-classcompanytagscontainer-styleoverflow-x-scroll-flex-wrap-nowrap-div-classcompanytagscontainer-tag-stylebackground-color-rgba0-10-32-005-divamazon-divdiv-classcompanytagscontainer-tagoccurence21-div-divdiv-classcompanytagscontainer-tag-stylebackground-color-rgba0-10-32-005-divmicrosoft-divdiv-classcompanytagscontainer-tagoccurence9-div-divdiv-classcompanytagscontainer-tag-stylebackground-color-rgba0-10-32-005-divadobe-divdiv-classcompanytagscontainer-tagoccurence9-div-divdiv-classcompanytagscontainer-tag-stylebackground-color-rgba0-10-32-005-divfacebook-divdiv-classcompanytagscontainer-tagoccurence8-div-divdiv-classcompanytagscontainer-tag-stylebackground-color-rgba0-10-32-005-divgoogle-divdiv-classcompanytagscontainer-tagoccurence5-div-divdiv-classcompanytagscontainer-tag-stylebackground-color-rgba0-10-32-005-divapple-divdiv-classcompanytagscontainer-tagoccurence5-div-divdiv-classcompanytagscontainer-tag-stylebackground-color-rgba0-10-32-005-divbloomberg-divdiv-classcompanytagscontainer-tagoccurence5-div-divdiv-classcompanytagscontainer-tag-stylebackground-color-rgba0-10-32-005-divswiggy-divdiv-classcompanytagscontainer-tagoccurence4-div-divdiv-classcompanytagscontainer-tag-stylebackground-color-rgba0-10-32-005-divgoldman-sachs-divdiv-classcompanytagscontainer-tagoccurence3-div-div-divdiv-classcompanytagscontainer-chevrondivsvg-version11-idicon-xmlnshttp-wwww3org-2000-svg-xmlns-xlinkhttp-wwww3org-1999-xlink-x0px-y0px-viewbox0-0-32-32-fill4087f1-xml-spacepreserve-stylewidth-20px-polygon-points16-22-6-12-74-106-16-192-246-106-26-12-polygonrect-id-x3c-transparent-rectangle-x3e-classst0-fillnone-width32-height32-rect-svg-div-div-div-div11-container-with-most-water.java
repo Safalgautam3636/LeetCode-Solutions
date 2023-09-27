@@ -8,6 +8,9 @@ class Solution {
             int h=Math.min(height[left],height[right]);
             int l=right-left;
             maxArea=Math.max(maxArea,h*l);
+            if(height[left]==height[right]){
+                left++;
+            }
             if(height[left]<height[right]){
                 left++;
             }
