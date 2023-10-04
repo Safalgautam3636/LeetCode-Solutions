@@ -1,31 +1,22 @@
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int ans = 0;
-        int count = 0;
-        int variable = k;
-        
-        int first = 0;
-        int second = 0;
-        
-        while (second < nums.length) {
-            if (nums[second] == 1) {
-                second++;
-            } else {
-                if (variable > 0) {
-                    second++;
-                    variable--;
-                } else {
-                    // Move the left pointer (first) to the right to shrink the window.
-                    while (nums[first] != 0) {
-                        first++;
-                    }
-                    first++;  // Move past the first 0.
-                    variable++;  // Increment variable since we are removing a 0.
-                }
+        int ans=0;
+        int start=0;
+        int window=0;
+        int zero=0;
+        for(int i=0;i<nums.length;i++){
+            window++;
+            if(nums[i]==0){
+                zero++;
             }
-            ans = Math.max(ans, second - first);
+            while(zero>k){
+                if(nums[start]==0){
+                    zero--;
+                }
+                start++;
+            }
+            ans=Math.max(ans,i-start+1);
         }
-        
         return ans;
     }
 }
