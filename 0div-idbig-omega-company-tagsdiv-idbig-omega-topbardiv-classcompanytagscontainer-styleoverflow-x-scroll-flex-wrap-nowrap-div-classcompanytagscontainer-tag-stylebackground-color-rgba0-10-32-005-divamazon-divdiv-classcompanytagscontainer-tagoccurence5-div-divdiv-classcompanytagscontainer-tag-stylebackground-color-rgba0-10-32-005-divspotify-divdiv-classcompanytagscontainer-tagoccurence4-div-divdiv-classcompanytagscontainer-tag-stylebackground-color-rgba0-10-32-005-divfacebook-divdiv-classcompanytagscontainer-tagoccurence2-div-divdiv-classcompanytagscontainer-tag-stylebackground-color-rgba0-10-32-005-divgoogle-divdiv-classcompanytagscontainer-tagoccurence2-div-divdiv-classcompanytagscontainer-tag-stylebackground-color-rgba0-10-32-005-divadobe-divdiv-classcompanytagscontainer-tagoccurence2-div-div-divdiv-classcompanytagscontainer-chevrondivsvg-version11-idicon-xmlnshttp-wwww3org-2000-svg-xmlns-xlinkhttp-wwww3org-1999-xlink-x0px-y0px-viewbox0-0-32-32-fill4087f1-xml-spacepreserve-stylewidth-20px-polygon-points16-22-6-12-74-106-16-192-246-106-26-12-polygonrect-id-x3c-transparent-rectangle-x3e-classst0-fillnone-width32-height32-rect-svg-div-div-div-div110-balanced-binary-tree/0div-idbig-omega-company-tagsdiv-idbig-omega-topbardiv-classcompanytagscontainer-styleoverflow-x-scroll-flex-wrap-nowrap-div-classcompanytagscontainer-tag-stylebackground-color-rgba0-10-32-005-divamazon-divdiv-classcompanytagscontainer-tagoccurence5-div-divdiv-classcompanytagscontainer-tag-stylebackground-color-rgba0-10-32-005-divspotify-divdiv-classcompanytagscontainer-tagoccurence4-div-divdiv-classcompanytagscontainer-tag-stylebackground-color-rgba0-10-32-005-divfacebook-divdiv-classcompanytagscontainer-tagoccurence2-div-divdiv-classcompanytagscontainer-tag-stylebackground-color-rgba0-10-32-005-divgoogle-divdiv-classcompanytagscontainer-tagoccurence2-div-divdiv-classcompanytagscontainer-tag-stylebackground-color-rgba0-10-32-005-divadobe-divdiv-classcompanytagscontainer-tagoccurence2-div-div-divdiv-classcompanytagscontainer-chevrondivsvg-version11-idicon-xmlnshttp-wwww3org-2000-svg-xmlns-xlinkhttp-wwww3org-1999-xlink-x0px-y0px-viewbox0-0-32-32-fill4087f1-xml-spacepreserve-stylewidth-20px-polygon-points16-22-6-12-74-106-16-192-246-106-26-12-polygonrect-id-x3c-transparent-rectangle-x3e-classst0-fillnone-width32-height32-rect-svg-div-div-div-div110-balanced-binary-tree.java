@@ -19,8 +19,8 @@ class Solution {
         if(root==null){
             return true;
         }
-        findDepth(root);
-        return ans;
+        return findDepth(root)==-1?false:true;
+        
     }
     int findDepth(TreeNode root){
         if(root==null){
@@ -28,8 +28,11 @@ class Solution {
         }
         int left=findDepth(root.left);
         int right=findDepth(root.right);
+        if(left==-1||right==-1){
+            return -1;
+        }
         if(Math.abs(left-right)>1){
-            ans=false;
+            return -1;
         }
         return 1+Math.max(left,right);
     }
