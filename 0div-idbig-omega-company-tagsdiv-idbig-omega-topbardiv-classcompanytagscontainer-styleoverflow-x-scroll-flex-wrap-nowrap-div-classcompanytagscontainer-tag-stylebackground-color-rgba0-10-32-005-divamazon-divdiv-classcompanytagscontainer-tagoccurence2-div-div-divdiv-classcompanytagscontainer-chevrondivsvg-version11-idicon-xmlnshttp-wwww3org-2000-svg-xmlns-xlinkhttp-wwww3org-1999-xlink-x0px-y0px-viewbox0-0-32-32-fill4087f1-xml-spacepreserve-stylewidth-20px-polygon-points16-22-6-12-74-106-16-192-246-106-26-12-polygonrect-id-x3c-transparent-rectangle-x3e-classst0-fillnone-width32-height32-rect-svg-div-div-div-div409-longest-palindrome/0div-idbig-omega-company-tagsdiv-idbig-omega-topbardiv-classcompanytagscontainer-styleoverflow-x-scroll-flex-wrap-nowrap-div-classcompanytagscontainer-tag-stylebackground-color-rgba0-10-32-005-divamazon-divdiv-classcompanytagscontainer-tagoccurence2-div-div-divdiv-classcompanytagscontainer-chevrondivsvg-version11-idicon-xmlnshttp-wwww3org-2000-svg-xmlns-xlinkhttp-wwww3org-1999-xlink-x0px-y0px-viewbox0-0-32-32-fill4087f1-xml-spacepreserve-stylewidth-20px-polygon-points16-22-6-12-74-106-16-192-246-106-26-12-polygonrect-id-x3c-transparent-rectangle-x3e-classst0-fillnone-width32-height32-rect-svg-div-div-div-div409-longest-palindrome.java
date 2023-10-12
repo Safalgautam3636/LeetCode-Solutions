@@ -7,9 +7,6 @@ class Solution {
         int length=0;
         int oddLength=0;
         for(Character x:hash.keySet()){
-            if(hash.get(x)==1){
-                oddLength=1;
-            }
             if(hash.get(x)%2==0){
                 length+=hash.get(x);
             }
