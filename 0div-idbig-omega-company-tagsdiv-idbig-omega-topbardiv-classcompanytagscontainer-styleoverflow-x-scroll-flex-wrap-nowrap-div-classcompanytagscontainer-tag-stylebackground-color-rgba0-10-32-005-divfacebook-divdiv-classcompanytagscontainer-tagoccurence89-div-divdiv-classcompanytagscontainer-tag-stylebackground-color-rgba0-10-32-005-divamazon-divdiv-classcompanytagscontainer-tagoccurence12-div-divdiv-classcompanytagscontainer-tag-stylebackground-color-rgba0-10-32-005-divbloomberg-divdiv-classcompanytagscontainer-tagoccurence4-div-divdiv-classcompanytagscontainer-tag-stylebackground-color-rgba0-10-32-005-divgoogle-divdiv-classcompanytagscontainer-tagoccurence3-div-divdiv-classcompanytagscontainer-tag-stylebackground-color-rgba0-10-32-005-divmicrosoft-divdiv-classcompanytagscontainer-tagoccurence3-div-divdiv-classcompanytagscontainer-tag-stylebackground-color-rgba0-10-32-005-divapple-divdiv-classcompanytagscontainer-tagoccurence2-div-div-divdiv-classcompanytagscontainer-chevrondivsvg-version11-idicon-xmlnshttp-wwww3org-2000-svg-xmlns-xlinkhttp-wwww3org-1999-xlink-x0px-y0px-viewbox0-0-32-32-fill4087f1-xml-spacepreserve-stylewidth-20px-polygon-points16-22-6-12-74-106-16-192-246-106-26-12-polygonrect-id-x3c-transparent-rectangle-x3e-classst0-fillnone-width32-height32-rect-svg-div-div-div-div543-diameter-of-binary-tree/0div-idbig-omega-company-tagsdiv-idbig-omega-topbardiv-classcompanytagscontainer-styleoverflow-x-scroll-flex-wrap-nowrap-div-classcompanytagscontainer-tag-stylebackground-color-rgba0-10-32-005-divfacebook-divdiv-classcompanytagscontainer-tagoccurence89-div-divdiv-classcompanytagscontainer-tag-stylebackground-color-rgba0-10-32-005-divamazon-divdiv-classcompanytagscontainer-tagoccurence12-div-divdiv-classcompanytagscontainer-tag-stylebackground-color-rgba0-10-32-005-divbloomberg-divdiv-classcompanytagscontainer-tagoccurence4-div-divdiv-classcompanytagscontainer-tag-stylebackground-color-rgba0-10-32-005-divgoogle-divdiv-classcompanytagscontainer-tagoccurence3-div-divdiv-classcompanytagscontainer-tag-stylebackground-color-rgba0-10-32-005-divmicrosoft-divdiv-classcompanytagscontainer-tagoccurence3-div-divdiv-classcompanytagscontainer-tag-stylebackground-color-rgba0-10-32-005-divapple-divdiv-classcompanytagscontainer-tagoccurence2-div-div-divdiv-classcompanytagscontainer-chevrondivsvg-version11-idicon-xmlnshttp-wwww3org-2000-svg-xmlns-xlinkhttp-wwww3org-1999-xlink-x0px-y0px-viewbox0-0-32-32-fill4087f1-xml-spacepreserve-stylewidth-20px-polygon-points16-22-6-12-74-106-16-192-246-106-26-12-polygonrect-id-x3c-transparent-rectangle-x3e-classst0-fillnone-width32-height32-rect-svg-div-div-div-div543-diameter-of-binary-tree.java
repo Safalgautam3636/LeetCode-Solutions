@@ -14,19 +14,25 @@
  * }
  */
 class Solution {
-    int temp=0;
+    
     public int diameterOfBinaryTree(TreeNode root) {
-        
-        diameter(root);
-        return temp;
+        int[] result = new int[]{0}; // Initialize the result to 0
+        depth(root, result);
+        return result[0];
     }
-    public int diameter(TreeNode root){
-        if(root==null){
+    
+    public int depth(TreeNode root, int[] result) {
+        if (root == null) {
             return 0;
         }
-        int left=diameter(root.left);
-        int right=diameter(root.right);
-        temp=Math.max(temp,left+right);
-        return 1+Math.max(left,right);
+        
+        int left = depth(root.left, result);
+        int right = depth(root.right, result);
+        
+        // Calculate the diameter through the current node
+        result[0] = Math.max(result[0], left + right);
+        
+        // Return the depth of the current node
+        return 1 + Math.max(left, right);
     }
 }
