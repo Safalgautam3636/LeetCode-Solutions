@@ -1,25 +1,24 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        Set<List<Integer>>ans=new HashSet<>();  // [[]]
+        HashSet<List<Integer>> ans=new HashSet<>();
         List<Integer>temp=new ArrayList<>();
-        int ptr=0;
-        sumHelper(candidates,target,ans,temp,ptr);
+        backtrack(candidates,target,ans,0,temp);
+        
         return new ArrayList(ans);
     }
-    private void sumHelper(int arr[],int target,Set<List<Integer>>ans,List<Integer>temp,int ptr){
-        if(target<0){
+    void backtrack(int[]candidates,int target,HashSet<List<Integer>> ans,int sum,List<Integer>temp ){
+        if(sum>target){
             return;
         }
-        if(target==0){
-            List<Integer>list=new ArrayList(temp);
-            Collections.sort(list);
-            ans.add(list);
+        if(sum==target){
+            List<Integer>store=new ArrayList(temp);
+            Collections.sort(store);
+            ans.add(store);
             return;
         }
-        
-        for(int i=0;i<arr.length;i++){
-            temp.add(arr[i]);
-            sumHelper(arr,target-arr[i],ans,temp,i);
+        for(int itr=0;itr<candidates.length;itr++){
+            temp.add(candidates[itr]);
+            backtrack(candidates,target,ans,sum+candidates[itr],temp);
             temp.remove(temp.size()-1);
         }
     }
