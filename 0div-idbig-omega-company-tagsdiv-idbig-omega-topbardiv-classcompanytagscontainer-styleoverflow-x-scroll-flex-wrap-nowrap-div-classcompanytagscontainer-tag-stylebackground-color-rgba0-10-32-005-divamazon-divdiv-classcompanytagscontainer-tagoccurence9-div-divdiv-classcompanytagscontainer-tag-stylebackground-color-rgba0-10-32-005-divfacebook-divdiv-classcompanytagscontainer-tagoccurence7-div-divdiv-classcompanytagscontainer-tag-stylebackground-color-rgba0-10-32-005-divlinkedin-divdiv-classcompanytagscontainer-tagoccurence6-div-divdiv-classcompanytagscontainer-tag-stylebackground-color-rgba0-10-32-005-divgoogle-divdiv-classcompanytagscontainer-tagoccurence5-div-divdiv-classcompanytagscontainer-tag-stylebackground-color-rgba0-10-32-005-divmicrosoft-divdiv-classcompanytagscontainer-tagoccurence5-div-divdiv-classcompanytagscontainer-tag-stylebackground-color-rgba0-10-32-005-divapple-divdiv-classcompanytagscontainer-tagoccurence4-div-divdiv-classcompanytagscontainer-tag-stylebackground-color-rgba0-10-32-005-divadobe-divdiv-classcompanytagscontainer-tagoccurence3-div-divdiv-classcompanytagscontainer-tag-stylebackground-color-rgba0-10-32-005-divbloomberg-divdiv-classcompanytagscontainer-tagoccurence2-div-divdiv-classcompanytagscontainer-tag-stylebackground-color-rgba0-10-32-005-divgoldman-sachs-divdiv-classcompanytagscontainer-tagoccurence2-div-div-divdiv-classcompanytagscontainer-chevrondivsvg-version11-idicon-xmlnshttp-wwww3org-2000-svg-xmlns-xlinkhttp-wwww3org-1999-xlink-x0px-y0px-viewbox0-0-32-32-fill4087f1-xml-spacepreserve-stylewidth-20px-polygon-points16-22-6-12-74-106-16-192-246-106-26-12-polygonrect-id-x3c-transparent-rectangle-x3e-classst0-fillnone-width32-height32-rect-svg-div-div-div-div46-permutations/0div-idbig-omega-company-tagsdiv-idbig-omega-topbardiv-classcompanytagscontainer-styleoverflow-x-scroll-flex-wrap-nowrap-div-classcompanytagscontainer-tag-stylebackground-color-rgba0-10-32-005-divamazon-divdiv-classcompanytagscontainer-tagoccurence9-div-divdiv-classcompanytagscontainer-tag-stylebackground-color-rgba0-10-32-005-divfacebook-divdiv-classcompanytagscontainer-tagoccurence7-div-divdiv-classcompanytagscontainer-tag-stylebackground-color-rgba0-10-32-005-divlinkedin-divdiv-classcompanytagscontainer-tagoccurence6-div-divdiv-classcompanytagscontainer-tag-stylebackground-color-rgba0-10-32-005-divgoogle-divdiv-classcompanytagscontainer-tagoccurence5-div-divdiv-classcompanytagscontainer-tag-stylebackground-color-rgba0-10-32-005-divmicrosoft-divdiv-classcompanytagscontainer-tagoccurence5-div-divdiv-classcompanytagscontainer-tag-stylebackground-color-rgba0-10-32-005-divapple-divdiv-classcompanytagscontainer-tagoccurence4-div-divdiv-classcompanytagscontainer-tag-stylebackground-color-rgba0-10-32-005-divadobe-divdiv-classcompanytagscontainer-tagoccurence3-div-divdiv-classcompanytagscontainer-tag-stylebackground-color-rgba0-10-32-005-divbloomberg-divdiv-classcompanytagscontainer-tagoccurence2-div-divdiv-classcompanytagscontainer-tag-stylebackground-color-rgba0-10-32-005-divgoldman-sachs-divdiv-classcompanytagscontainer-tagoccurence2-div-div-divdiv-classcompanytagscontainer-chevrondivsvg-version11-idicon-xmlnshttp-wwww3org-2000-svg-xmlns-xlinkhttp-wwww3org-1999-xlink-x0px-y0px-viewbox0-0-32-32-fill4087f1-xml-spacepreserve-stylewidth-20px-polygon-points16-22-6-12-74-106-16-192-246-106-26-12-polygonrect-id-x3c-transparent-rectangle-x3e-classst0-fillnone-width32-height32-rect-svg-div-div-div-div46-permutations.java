@@ -14,11 +14,12 @@ class Solution {
             return;
         }
         for(int i=0;i<input.size();i++){
-            subans.add(input.get(i));
+            List<Integer>listx=new ArrayList(subans);
+            listx.add(input.get(i));
             List<Integer>list1=new ArrayList(input.subList(0,i));
-            list1.addAll(input.subList(i+1,input.size()));
-            backtrack(list1,subans,ans);
-            subans.remove(subans.size()-1);
+            list1.addAll(new ArrayList(input.subList(i+1,input.size())));
+            backtrack(list1,listx,ans);
+            // subans.remove(subans.size()-1);
         }
     }
 }
