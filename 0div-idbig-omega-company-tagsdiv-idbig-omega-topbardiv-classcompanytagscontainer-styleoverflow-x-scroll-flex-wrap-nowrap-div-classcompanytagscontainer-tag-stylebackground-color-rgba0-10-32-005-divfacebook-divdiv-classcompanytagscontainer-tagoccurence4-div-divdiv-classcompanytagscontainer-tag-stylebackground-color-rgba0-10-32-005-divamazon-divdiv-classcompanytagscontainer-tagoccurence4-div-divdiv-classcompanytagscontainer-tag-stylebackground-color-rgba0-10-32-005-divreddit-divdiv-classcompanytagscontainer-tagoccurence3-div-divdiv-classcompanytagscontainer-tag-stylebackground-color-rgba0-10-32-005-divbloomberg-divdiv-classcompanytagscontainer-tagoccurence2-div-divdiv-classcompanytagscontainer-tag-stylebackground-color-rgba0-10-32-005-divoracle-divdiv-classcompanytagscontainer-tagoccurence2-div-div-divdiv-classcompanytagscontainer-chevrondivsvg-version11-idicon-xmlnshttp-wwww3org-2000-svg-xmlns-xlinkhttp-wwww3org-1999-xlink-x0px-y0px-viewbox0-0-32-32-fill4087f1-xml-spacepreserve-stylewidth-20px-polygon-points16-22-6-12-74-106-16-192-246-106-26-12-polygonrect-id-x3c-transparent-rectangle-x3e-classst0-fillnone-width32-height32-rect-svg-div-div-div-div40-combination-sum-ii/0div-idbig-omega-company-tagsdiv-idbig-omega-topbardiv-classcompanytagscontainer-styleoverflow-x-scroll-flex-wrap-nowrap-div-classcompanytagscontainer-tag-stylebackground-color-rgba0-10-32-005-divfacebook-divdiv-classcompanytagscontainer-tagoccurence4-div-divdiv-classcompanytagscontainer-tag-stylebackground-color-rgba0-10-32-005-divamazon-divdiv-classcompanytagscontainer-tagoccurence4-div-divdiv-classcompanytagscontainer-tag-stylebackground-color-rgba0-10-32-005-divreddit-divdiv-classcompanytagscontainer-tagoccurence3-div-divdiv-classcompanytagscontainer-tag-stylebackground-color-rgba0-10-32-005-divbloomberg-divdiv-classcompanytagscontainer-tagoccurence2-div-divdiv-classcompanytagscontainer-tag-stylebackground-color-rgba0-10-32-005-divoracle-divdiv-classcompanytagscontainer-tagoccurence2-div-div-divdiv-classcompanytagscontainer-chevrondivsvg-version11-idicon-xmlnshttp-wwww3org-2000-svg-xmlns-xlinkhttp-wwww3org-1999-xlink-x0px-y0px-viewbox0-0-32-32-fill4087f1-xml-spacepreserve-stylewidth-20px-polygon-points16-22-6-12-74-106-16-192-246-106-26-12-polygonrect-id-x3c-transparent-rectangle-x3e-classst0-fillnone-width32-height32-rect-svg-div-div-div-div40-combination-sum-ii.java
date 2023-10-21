@@ -13,8 +13,8 @@ class Solution {
             ans.add(new ArrayList<>(subans));
             return;
         }
-        int prev=-1;
         for(int i=index;i<candidates.length;i++){
+            //dont understand why i>index instead of i>0
             if(i>index&&candidates[i]==candidates[i-1]){
                 continue;
             }
