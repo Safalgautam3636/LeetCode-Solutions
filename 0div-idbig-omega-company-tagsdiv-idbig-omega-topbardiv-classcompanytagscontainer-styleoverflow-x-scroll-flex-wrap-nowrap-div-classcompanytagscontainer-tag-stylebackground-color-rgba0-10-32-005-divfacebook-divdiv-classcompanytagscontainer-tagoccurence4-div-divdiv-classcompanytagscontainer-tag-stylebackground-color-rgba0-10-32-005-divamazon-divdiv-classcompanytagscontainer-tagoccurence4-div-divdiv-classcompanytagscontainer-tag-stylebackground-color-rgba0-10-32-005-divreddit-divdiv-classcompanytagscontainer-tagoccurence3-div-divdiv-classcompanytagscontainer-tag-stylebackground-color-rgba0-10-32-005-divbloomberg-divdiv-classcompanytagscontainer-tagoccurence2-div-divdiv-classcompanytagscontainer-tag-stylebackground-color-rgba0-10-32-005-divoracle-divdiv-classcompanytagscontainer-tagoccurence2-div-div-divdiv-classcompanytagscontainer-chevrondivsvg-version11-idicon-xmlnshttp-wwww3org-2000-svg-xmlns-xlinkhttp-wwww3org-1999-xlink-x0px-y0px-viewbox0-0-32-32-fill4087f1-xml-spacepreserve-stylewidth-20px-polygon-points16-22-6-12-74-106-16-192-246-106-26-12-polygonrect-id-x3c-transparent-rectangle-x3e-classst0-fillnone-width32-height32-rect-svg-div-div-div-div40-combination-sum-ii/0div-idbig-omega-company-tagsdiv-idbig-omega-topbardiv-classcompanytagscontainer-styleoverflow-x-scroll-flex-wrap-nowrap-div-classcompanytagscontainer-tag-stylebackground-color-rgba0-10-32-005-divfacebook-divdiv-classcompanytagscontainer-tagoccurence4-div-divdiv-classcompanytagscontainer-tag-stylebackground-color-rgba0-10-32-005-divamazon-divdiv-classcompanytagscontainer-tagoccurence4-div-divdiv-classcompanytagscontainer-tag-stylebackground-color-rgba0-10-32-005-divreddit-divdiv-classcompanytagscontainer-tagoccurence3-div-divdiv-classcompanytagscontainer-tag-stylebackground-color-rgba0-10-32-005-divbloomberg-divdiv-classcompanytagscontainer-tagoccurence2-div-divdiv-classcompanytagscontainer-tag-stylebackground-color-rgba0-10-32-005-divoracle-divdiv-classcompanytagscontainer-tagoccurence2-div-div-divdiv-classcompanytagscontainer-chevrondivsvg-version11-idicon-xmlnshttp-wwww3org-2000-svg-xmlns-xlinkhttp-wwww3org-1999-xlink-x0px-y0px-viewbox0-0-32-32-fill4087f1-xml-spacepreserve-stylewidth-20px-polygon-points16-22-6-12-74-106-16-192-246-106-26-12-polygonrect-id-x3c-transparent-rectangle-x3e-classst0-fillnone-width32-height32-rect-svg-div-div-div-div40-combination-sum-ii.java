@@ -15,7 +15,7 @@ class Solution {
         }
         for(int i=index;i<candidates.length;i++){
             //dont understand why i>index instead of i>0
-            if(i>index&&candidates[i]==candidates[i-1]){
+            if(i!=index&&candidates[i]==candidates[i-1]){
                 continue;
             }
             subans.add(candidates[i]);
