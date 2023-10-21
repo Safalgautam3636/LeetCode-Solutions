@@ -13,13 +13,16 @@ class Solution {
             ans.add(new ArrayList<>(subans));
             return;
         }
+        int prev=-1;
         for(int i=index;i<candidates.length;i++){
             if(i>index&&candidates[i]==candidates[i-1]){
                 continue;
             }
             subans.add(candidates[i]);
             backtrack(candidates,target,sum+candidates[i],i+1,subans,ans);
+            
             subans.remove(subans.size()-1);
+            
         }
         
     }
