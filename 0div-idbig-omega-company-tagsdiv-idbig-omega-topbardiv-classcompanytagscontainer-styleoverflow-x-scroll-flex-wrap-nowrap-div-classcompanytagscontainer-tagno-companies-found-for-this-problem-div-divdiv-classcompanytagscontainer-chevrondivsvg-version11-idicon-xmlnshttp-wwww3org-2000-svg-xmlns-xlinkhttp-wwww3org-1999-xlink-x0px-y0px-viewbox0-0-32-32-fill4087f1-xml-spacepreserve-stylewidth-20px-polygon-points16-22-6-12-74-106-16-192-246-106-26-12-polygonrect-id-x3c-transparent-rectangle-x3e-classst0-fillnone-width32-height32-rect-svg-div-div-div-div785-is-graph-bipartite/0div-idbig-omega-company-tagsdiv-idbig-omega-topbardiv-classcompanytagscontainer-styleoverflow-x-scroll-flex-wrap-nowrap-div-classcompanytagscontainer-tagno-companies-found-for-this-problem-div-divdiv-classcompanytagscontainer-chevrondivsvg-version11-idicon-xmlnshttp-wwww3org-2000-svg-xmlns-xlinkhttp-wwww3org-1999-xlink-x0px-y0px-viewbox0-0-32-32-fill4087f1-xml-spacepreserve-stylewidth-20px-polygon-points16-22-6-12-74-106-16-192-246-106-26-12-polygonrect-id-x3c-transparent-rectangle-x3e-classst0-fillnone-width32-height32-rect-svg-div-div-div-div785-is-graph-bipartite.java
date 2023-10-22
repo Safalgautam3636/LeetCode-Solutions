@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<color.length;i++)color[i]=-1;
         for(int i=0;i<color.length;i++){
             if(color[i]==-1){
-                if(!check(i,graph,color)){
+                if(!check(i,graph,0,color)){
                     return false;
                 }
             }
@@ -13,22 +13,18 @@ class Solution {
         return true;
     }
     
-    boolean check(int i,int[][]graph,int[]color){
-        Queue<Integer>queue=new LinkedList<>();
-        queue.add(i);
-        color[i]=0;
-        while(queue.isEmpty()==false){
-            int node=queue.poll();
+    boolean check(int node,int[][]graph,int mark,int[]color){
+        
+            color[node]=mark;
             for(int it:graph[node]){
                 if(color[it]==-1){
-                    color[it]=1-color[node];
-                    queue.add(it);
+                    if(!check(it,graph,1-mark,color))return false;
                 }
                 else if(color[it]==color[node]){
                     return false;
                 }
             }
-        }
+       
         return true;
     }
     
