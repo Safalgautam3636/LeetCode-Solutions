@@ -1,4 +1,5 @@
 class Solution {
+    //https://leetcode.com/problems/insert-interval/discuss/2429511/JAVA-oror-EXPLAINED-SOLUTION
     public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]>ans=new ArrayList<>();
         for(int[] interval:intervals){
