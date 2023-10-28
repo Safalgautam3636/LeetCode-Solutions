@@ -15,18 +15,18 @@
  */
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if(preorder==null||preorder.length==0){
-            return null;
-        }
-        int index=0;
+        if(preorder==null||preorder.length==0)return null;
         int root=preorder[0];
+        int point=0;
         for(int i=0;i<inorder.length;i++){
-            if(root==inorder[i])
-                index=i;
+            if(root==inorder[i]){
+                point=i;
+            }
         }
         TreeNode rootNode=new TreeNode(root);
-        rootNode.left=buildTree(Arrays.copyOfRange(preorder,1,index+1),Arrays.copyOfRange(inorder,0,index));
-        rootNode.right=buildTree(Arrays.copyOfRange(preorder,index+1,inorder.length),Arrays.copyOfRange(inorder,index+1,inorder.length));
+        rootNode.left=buildTree(Arrays.copyOfRange(preorder,1,point+1),Arrays.copyOfRange(inorder,0,point));
+        rootNode.right=buildTree(Arrays.copyOfRange(preorder,point+1,preorder.length),Arrays.copyOfRange(inorder,point+1,inorder.length));
         return rootNode;
+        
     }
 }
