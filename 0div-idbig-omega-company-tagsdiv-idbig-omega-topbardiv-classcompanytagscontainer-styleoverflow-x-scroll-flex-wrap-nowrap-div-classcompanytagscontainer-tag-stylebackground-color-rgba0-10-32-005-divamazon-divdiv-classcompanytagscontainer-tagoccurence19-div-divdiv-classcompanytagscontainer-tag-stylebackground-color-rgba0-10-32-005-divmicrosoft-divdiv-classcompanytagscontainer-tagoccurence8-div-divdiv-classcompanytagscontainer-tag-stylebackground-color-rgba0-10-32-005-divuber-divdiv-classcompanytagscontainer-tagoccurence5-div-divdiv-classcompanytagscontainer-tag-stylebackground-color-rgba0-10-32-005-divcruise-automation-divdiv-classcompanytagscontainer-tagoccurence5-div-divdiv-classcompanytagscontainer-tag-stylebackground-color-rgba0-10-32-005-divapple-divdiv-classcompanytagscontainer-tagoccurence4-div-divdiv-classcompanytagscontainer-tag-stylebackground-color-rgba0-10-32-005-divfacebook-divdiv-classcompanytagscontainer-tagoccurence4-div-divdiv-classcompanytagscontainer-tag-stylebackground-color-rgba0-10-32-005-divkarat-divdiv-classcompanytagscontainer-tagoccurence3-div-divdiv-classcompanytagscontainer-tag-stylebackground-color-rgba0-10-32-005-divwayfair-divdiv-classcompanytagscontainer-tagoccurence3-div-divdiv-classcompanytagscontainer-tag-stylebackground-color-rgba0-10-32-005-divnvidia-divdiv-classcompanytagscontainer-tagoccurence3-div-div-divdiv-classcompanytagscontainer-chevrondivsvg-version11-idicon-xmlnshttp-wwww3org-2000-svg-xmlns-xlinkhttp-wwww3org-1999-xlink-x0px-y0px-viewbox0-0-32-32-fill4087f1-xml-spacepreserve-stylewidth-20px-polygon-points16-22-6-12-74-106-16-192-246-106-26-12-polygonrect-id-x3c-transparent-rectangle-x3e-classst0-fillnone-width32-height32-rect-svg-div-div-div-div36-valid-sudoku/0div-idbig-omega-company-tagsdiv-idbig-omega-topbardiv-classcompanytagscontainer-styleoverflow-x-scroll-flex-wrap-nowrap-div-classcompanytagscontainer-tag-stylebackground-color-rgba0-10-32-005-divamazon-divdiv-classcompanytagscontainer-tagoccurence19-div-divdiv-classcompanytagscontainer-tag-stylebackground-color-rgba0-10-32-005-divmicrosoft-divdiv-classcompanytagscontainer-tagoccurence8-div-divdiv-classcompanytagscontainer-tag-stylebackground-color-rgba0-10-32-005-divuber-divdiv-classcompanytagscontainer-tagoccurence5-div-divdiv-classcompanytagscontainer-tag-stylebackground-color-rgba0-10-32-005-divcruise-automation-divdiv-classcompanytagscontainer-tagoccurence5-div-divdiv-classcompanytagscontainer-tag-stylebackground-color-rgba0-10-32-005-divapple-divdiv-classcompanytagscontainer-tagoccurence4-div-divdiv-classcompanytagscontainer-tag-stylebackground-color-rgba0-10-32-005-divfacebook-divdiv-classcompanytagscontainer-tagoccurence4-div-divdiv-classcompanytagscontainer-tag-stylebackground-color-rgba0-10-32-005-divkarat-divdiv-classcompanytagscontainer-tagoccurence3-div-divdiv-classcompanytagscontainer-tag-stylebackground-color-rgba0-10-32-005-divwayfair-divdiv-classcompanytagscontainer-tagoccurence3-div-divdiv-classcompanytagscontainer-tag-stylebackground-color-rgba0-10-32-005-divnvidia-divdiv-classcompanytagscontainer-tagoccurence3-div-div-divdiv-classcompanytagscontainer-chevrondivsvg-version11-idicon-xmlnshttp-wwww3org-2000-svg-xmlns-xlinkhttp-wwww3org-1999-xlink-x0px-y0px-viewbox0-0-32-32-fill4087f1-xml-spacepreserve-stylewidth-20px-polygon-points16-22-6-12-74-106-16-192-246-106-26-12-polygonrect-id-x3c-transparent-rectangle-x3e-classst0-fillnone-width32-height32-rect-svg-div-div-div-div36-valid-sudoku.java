@@ -8,12 +8,17 @@ class Solution {
             for (int j = 0; j < 9; j++) {
                 char currentChar = board[i][j];
                 if (currentChar != '.') {
-                    String rowKey = currentChar + " in row " + i;
-                    String colKey = currentChar + " in col " + j;
+                    String rowKey = currentChar+"row"+i;
+                    String colKey = currentChar+"col"+j;
                     String squareKey = currentChar + " in square " + i / 3 + "-" + j / 3;
                     
-                    if (!rows.add(rowKey) || !cols.add(colKey) || !squares.add(squareKey)) {
+                    if (rows.contains(rowKey) || cols.contains(colKey) || squares.contains(squareKey)) {
                         return false;
+                    }
+                    else{
+                        rows.add(rowKey);
+                        cols.add(colKey);
+                        squares.add(squareKey);
                     }
                 }
             }
