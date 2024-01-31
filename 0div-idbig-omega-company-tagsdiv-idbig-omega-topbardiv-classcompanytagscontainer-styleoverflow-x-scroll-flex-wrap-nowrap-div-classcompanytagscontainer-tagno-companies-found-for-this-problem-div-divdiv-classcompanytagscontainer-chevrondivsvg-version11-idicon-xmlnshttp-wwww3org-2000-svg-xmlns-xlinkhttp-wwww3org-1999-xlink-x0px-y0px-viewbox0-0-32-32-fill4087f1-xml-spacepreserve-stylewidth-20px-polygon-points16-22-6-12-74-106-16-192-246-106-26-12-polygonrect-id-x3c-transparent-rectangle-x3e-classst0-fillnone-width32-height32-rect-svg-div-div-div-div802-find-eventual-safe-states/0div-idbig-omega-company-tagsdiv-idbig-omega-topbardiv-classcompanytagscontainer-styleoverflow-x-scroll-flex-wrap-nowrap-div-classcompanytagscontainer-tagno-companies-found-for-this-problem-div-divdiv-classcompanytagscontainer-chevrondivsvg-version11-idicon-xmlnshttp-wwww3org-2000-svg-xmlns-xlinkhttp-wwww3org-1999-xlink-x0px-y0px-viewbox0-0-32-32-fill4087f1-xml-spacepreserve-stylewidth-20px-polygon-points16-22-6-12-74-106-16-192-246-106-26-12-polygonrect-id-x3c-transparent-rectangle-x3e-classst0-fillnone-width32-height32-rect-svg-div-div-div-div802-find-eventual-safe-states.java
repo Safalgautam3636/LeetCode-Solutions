@@ -1,4 +1,5 @@
 class Solution {
+    //striver G20
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int n=graph.length;
         int visited[]=new int[n];
