@@ -10,13 +10,13 @@ class Solution {
         return image;
     }
     
-    void dfs(int i,int j,int[][]image,int color,int from){
-        if(i<=image.length-1&&j<=image[0].length-1&&i>=0&&j>=0&&image[i][j]==from&&color!=from){
-            image[i][j]=color;
-            dfs(i-1,j,image,color,from);
-            dfs(i,j-1,image,color,from);
-            dfs(i+1,j,image,color,from);
-            dfs(i,j+1 ,image,color,from);
+    void dfs(int i,int j,int[][]image,int target,int initial){
+        if(i<=image.length-1&&j<=image[0].length-1&&i>=0&&j>=0&&image[i][j]==initial&&target!=initial){
+            image[i][j]=target;
+            dfs(i-1,j,image,target,initial);
+            dfs(i,j-1,image,target,initial);
+            dfs(i+1,j,image,target,initial);
+            dfs(i,j+1 ,image,target,initial);
         }
     }
 }
