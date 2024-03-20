@@ -1,33 +1,33 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        char arr1[]=new char[26];
-        char arr2[]=new char[26];
-        if (s2.length() < s1.length()) {
-        return false;
-    }
-
-        for(int i=0;i<s1.length();i++){
-            arr1[s1.charAt(i)-'a']++;
-        }
-        for(int j=0;j<s1.length();j++){
-            arr2[s2.charAt(j)-'a']++;
-        }
-        if(Arrays.equals(arr1,arr2)){
-                return true;
-        }
+        // ab
+        // eibaooo
+        int windowSize=s1.length();
         int left=0;
-        for(int j=1;j<=s2.length()-s1.length();j++){
-            arr2[s2.charAt(j-1)-'a']--;
-            arr2[s2.charAt(j+s1.length()-1)-'a']++;
-            if(Arrays.equals(arr1,arr2)){
-            return true;}
-            
-            
+        HashMap<Character,Integer>hash1=new HashMap<>();
+        for(char x: s1.toCharArray()){
+            hash1.put(x,hash1.getOrDefault(x,0)+1);
         }
-        if(Arrays.equals(arr1,arr2)){
-            return true;
+        HashMap<Character,Integer>hash2=new HashMap<>();
+        for(int right=0;right<s2.length();right++){
+            hash2.put(s2.charAt(right),hash2.getOrDefault(s2.charAt(right),0)+1);
+            
+            if(right-left+1==windowSize){
+                    if(hash1.equals(hash2)){
+                    return true;
+                }
+                else{
+                    hash2.put(s2.charAt(left),hash2.getOrDefault(s2.charAt(left),0)-1);
+                    if(hash2.get(s2.charAt(left))<=0){
+                        hash2.remove(s2.charAt(left));
+                    }
+                    left++;
+                }
+            }
+            
+            
+            
         }
         return false;
-        
     }
 }
