@@ -13,13 +13,13 @@ class Solution {
                     max=hash.get(x);
                 }
             }
-            if(window-max<=k){
-                ans=Math.max(ans,window);
-            }
-            else{
+            while(window-max>k){
                 hash.put(s.charAt(left),hash.get(s.charAt(left))-1);
                 left++;
+                window--;
+                
             }
+            ans=Math.max(ans,window);
             
             
         }
