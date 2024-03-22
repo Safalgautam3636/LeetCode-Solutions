@@ -12,7 +12,7 @@ class Solution {
                 return nums[mid];
             }
             else if(nums[mid]<nums[last]){
-                last=mid-1;
+                last=mid;
                 
             }
             else{
