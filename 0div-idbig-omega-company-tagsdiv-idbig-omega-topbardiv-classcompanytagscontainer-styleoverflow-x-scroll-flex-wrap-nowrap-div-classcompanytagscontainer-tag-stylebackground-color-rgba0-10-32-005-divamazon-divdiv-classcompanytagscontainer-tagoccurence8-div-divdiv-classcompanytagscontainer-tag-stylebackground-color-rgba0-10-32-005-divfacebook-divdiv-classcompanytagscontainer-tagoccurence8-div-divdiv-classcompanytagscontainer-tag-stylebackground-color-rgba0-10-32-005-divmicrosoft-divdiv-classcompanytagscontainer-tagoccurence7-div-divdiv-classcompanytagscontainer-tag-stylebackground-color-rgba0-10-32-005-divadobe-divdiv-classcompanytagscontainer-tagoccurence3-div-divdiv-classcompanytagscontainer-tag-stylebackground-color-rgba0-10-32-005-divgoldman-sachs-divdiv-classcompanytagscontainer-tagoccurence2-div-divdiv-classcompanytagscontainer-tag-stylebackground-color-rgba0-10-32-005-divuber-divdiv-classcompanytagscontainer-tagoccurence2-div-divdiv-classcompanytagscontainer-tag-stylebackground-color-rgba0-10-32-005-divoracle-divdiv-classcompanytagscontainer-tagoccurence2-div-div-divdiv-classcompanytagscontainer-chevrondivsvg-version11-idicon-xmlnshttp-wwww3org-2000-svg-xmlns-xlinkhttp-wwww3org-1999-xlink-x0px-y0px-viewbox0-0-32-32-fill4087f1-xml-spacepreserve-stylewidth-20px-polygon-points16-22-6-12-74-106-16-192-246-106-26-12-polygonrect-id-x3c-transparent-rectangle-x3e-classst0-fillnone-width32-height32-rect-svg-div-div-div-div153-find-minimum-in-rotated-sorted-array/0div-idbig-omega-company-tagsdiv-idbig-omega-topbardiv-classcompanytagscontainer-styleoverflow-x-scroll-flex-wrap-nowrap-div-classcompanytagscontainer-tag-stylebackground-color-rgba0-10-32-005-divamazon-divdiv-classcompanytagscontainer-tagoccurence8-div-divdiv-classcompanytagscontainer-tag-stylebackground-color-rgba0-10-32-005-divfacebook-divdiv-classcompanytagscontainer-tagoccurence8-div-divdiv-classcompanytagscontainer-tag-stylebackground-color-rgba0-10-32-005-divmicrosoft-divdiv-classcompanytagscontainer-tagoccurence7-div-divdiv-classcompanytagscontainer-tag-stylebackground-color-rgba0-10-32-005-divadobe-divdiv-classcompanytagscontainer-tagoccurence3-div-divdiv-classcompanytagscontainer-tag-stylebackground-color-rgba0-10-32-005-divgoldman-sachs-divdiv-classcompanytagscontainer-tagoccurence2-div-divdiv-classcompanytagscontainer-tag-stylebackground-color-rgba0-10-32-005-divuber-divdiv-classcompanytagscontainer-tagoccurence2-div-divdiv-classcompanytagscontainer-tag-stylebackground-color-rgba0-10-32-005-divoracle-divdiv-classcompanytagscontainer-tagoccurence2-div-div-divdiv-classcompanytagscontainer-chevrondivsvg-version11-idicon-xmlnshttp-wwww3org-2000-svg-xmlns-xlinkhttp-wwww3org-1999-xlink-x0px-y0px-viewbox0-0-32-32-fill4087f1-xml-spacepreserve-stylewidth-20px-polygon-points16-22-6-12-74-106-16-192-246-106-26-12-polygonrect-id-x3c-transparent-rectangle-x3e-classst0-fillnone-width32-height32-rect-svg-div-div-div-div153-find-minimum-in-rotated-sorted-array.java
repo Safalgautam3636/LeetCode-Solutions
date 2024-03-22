@@ -11,11 +11,12 @@ class Solution {
             if(nums[mid]<=nums[prev]&&nums[mid]<=nums[next]){
                 return nums[mid];
             }
-            else if(nums[mid]>nums[last]){
-                first=mid+1;
+            else if(nums[mid]<nums[last]){
+                last=mid-1;
+                
             }
             else{
-                last=mid-1;
+                first=mid+1;
             }
         }
         return -1;
