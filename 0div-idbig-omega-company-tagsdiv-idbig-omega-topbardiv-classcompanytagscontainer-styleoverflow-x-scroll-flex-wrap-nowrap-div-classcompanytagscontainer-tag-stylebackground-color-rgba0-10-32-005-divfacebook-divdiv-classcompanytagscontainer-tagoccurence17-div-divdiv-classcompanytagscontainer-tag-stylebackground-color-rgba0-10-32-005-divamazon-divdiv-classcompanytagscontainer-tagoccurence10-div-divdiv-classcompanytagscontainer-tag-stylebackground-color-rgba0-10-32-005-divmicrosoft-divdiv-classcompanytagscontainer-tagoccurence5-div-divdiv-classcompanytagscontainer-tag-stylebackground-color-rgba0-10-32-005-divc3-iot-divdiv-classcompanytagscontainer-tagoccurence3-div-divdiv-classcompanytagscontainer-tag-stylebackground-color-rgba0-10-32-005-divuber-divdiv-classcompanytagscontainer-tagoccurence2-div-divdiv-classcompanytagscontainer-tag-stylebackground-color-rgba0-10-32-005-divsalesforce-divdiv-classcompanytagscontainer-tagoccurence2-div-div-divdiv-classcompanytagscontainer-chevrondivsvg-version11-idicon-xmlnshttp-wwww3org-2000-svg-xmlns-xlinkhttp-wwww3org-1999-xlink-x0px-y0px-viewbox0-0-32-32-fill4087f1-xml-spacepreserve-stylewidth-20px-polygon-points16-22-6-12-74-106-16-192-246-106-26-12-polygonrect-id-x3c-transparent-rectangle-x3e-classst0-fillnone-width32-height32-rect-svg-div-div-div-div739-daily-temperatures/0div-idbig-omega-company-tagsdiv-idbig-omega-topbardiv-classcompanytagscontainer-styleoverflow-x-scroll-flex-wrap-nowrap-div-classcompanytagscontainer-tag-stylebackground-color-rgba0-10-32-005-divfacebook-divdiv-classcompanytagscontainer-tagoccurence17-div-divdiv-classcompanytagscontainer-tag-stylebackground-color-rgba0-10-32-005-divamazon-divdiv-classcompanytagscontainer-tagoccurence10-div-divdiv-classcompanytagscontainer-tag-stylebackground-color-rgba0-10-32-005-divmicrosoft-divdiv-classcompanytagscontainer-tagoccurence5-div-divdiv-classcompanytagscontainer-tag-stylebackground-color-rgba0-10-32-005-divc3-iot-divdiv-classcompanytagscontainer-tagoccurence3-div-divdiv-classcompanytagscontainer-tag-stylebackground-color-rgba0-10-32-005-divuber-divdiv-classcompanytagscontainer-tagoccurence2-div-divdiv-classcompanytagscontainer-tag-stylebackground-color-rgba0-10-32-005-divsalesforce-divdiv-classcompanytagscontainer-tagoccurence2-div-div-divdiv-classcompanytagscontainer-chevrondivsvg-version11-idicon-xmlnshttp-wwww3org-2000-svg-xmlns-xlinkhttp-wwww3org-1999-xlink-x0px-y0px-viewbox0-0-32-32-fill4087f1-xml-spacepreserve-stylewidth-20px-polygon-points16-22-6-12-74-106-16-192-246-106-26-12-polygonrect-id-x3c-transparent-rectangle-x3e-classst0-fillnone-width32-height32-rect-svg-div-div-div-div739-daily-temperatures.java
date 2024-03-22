@@ -8,7 +8,7 @@ class Solution {
             }
             stack.add(day);
         }
-        
+        ans[temperatures.length-1]=0;
         return ans;
     }
 }
