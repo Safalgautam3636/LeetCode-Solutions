@@ -1,29 +1,43 @@
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    private ListNode findMid(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-        ListNode prev = null; // To track the end of the first half
-        while (fast != null && fast.next != null) {
-            prev = slow;
-            slow = slow.next;
-            fast = fast.next.next;
+    private ListNode findMid(ListNode head){
+        
+        ListNode copyHead=head;
+        ListNode slow=copyHead;
+        ListNode fast=copyHead;
+        ListNode track=copyHead;
+        while(fast!=null&&fast.next!=null){
+            track=slow;
+            fast=fast.next.next;
+            slow=slow.next;
         }
-        prev.next = null;
+        track.next=null;
         return slow;
     }
-    
-    private ListNode reverse(ListNode head) {
-        ListNode prev = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = prev;
-            prev = head;
-            head = next;
+    private ListNode reverse(ListNode head){
+        ListNode copyHead=head;
+        ListNode prev=null;
+        ListNode last=head;
+        while(copyHead!=null){
+            last=copyHead.next;
+            copyHead.next=prev;
+            prev=copyHead;
+            copyHead=last;
         }
         return prev;
+        
     }
-    
-        private ListNode merge(ListNode head1,ListNode head2){
+    private ListNode merge(ListNode head1,ListNode head2){
         ListNode copyHead1=head1;
         ListNode copyHead2=head2;
         ListNode store=new ListNode(-1);
@@ -45,15 +59,15 @@ class Solution {
         }
         return dummyNode.next;
     }
-
-    
     public void reorderList(ListNode head) {
-        if (head == null || head.next == null) {
-            return;
-        }
+        // find mid 
+        // reverse last part
+        //first from first list and second from second list
+        if(head==null||head.next==null)return;
+        ListNode mid=findMid(head);
+        ListNode reverseFromMid=reverse(mid);
         
-        ListNode mid = findMid(head);
-        ListNode secondHalfReversed = reverse(mid);
-        head = merge(head, secondHalfReversed);
+        head=merge(head,reverseFromMid);
     }
 }
+
