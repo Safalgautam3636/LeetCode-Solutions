@@ -23,23 +23,29 @@ class Solution {
         return prev;
     }
     
-    private ListNode merge(ListNode head1, ListNode head2) {
-        ListNode dummy = new ListNode(-1);
-        ListNode tail = dummy;
-        while (head1 != null || head2 != null) {
-            if (head1 != null) {
-                tail.next = head1;
-                tail = tail.next;
-                head1 = head1.next;
-            }
-            if (head2 != null) {
-                tail.next = head2;
-                tail = tail.next;
-                head2 = head2.next;
-            }
+        private ListNode merge(ListNode head1,ListNode head2){
+        ListNode copyHead1=head1;
+        ListNode copyHead2=head2;
+        ListNode store=new ListNode(-1);
+        ListNode dummyNode=store;
+        while(copyHead1!=null&&copyHead2!=null){
+            dummyNode.next=copyHead1;
+            dummyNode=dummyNode.next;
+            copyHead1=copyHead1.next;
+            
+            dummyNode.next=copyHead2;
+            dummyNode=dummyNode.next;
+            copyHead2=copyHead2.next;
         }
-        return dummy.next;
+        if(copyHead1!=null){
+            dummyNode.next=copyHead1;
+        }
+        if(copyHead2!=null){
+            dummyNode.next=copyHead2;
+        }
+        return dummyNode.next;
     }
+
     
     public void reorderList(ListNode head) {
         if (head == null || head.next == null) {
