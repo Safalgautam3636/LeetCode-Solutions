@@ -15,19 +15,17 @@
  */
 class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-
-        if(root==null||subRoot==null)return false;
-        if(same(root,subRoot))return true;
-        return isSubtree( root.left,  subRoot)||isSubtree( root.right, subRoot);
-        
-        
-    }
-    boolean same(TreeNode root1,TreeNode root2){
-        if(root1==null&&root2==null)return true;
-        if(root1==null||root2==null)return false;
-        if(root1.val!=root2.val){
-            return false;
+        if(root==null)return false;
+        if(isSame(root,subRoot)==true){
+            return true;
         }
-        return same(root1.left,root2.left)&&same(root1.right,root2.right);
+        return isSubtree(root.left,subRoot)||isSubtree(root.right,subRoot);
+    }
+    boolean isSame(TreeNode t1, TreeNode t2){
+        if(t1==null&&t2==null)return true;
+        if(t1==null&&t2!=null)return false;
+        if(t1!=null&&t2==null)return false;
+        if(t1.val!=t2.val)return false;
+        return isSame(t1.left,t2.left)&&isSame(t1.right,t2.right);
     }
 }
