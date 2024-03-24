@@ -10,11 +10,11 @@ class Solution {
             ans.add(new ArrayList<>(temp));
             return;
         }
-        List<Integer>lol=new ArrayList<>(temp);
         temp.add(nums[i]);
         
         dfs(nums,ans,i+1,temp);
         
-        dfs(nums,ans,i+1,lol);
+        temp.remove(temp.size()-1);
+         dfs(nums,ans,i+1,temp);
     }
 }
