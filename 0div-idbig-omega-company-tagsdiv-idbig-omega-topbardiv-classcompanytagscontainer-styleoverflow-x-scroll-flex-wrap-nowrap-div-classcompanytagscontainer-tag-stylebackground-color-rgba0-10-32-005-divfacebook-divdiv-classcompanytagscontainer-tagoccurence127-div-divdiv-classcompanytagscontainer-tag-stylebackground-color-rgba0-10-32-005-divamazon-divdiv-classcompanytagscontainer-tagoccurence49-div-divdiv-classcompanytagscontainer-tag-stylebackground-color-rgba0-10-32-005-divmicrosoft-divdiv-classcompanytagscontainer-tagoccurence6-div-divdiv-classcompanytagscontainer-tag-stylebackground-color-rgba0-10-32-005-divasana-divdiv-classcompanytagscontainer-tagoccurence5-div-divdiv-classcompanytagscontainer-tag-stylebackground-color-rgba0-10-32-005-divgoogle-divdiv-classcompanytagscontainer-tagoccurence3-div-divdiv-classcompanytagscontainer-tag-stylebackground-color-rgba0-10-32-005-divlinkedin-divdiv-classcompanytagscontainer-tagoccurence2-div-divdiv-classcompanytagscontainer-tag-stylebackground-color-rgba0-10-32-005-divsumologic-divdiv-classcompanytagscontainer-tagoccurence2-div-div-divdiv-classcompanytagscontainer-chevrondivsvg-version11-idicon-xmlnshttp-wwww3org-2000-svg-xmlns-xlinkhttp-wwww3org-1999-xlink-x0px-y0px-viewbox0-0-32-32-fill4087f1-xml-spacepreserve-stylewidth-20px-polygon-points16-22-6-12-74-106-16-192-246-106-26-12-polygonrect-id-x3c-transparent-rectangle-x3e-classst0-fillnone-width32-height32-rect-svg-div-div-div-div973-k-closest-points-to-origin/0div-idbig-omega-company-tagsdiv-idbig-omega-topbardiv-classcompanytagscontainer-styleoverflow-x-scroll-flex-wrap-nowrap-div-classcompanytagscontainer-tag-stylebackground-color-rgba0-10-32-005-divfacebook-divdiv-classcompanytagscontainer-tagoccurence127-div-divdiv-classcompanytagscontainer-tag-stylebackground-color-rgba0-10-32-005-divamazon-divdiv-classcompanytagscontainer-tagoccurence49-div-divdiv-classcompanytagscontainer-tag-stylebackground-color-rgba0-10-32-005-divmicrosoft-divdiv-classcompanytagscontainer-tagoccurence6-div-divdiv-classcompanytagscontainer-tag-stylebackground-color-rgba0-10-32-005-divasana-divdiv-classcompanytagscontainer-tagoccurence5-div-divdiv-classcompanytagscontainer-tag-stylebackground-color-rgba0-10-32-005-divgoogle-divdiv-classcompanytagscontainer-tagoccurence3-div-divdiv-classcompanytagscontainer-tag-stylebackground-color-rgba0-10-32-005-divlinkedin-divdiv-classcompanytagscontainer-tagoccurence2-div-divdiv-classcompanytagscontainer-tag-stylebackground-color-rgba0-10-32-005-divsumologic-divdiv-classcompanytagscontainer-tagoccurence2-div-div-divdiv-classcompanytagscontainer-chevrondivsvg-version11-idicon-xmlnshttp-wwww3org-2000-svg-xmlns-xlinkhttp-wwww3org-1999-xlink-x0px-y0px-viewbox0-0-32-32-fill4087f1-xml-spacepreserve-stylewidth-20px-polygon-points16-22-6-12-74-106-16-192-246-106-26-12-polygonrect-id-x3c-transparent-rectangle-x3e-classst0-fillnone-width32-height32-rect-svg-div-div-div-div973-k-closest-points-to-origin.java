@@ -1,42 +1,30 @@
-class Node implements Comparable<Node>{
+class Node{
+    int x;
+    int y;
     int distance;
-    int left;
-    int right;
-    Node(int left,int right){
-        this.distance=left*left+right*right;
-        this.left=left;
-        this.right=right;
-    }
-    public String toString(){
-        return left+""+right+" ->"+distance;
-    }
-    public int compareTo(Node a){
-        if(this.distance==a.distance){
-            return 0;
-        }
-        if(this.distance>a.distance){
-            return 1;
-        }
-        else{
-            return -1;
-        }
+    Node(int x,int y){
+        this.x=x;
+        this.y=y;
+        this.distance=x*x+y*y;
     }
 }
 class Solution {
+    
     public int[][] kClosest(int[][] points, int k) {
-        PriorityQueue<Node>pq=new PriorityQueue<>();
-        for(int x[]:points){
-            pq.offer(new Node(x[0],x[1]));
+        PriorityQueue<Node>pq=new PriorityQueue<>((o1,o2)->o1.distance-o2.distance);
+        for(int[]point: points){
+            pq.offer(new Node(point[0],point[1]));
+            
+        }
+        int[][]ans=new int[k][2];
+        int ptr=0;
+        while(ptr!=k&&pq.size()>0){
+            Node pol=pq.poll();
+            int temp[]={pol.x,pol.y};
+            ans[ptr]=temp;
+            ptr++;
         }
         
-        int ans[][]=new int[k][2];
-        
-        while(k>=1&&pq.size()>0){
-            Node poll=pq.poll();
-            int[]arr={poll.left,poll.right};
-            ans[k-1]=arr;
-            k--;
-        }
         return ans;
     }
 }
