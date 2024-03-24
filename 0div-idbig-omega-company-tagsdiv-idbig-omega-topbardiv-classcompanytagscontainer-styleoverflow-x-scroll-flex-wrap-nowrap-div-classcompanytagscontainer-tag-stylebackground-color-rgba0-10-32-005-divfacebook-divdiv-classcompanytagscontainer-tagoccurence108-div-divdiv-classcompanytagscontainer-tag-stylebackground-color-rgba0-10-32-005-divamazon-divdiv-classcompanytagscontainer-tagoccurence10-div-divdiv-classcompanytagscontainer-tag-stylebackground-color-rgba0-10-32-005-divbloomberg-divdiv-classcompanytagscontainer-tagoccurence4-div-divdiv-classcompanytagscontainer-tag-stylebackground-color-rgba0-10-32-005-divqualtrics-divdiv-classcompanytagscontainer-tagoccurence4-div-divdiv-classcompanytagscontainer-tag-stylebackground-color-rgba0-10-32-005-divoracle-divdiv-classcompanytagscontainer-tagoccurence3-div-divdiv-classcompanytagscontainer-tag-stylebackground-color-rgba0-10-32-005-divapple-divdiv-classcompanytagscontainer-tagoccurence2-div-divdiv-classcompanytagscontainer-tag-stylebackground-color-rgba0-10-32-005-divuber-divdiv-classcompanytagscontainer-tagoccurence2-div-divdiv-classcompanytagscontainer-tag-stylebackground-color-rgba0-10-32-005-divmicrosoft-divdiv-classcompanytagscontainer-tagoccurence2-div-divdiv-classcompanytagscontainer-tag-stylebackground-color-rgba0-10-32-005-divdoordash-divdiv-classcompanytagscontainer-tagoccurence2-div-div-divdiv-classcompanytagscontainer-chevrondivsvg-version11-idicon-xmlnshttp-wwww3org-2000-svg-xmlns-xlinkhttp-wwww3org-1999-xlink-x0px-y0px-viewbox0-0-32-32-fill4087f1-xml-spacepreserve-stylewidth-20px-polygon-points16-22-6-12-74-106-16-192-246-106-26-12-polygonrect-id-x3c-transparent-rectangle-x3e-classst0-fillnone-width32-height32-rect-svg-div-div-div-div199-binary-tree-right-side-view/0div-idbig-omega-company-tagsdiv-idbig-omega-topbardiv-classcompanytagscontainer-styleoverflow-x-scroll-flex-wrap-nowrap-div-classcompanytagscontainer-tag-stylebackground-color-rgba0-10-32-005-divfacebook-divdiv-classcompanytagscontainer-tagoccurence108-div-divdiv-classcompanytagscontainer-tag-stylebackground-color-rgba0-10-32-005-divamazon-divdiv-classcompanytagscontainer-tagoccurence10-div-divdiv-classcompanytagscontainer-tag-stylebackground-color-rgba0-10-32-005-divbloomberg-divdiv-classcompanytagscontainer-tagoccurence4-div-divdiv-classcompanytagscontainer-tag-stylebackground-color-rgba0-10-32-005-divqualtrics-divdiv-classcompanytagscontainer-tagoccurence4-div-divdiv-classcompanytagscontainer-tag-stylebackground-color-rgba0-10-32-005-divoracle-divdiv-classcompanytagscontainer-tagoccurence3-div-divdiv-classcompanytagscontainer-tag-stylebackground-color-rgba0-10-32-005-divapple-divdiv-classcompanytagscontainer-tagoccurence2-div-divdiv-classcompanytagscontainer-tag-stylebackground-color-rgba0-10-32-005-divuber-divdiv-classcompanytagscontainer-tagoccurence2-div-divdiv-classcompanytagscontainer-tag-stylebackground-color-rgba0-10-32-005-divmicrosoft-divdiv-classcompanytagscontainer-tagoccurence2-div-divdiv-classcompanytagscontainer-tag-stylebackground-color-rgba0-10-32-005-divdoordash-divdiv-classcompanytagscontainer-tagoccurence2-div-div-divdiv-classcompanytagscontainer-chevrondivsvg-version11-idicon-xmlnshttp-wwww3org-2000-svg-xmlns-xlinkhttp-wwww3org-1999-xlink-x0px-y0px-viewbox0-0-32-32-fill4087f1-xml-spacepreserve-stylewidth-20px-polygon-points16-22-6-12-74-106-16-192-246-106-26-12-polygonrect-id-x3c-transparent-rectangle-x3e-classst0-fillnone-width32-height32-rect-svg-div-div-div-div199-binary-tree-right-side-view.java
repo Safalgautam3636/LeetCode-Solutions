@@ -21,10 +21,11 @@ class Solution {
         queue.add(root);
         while(!queue.isEmpty()){
             int size=queue.size();
-            List<Integer>store=new ArrayList<>();
             for(int i=0;i<size;i++){
                 TreeNode ele=queue.poll();
-                
+                if(i==size-1){
+                    ans.add(ele.val);
+                }
                 if(ele.left!=null){
                     queue.add(ele.left);
                 }
@@ -32,9 +33,7 @@ class Solution {
                 {
                     queue.add(ele.right);
                 }
-                store.add(ele.val);
             }
-            ans.add(store.get(size-1));
         }
         return ans;
     }
