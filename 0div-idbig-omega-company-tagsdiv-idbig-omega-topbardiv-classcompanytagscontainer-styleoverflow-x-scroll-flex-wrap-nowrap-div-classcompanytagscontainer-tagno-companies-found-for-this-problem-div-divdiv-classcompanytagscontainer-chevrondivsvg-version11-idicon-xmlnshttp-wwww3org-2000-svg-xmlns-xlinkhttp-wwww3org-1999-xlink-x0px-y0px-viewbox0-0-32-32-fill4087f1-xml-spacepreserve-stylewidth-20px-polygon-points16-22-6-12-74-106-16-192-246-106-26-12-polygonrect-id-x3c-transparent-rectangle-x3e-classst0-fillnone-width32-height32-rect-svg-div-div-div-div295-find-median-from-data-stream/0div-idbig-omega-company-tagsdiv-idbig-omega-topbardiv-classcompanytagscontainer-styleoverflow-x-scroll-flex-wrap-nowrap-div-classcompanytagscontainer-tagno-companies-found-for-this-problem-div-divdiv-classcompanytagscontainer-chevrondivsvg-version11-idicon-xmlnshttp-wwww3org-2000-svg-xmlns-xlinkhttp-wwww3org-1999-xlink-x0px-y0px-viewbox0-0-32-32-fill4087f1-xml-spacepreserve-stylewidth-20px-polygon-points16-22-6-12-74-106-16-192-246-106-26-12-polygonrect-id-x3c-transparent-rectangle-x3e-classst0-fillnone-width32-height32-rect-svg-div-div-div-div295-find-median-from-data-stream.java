@@ -1,35 +1,31 @@
 class MedianFinder {
-    //has all the small elements
-    Queue<Integer>maxHeap;
-    //has all the greater elements
-    Queue<Integer>minHeap;
-    
+    PriorityQueue<Integer>minHeap;
+    PriorityQueue<Integer>maxHeap;
     public MedianFinder() {
-        maxHeap=new PriorityQueue<>((a,b)->b-a);
         minHeap=new PriorityQueue<>();
+        maxHeap=new PriorityQueue<>((o1,o2)->o2-o1);
     }
     
     public void addNum(int num) {
         maxHeap.add(num);
-        if(maxHeap.size()-minHeap.size()>1||!minHeap.isEmpty() && minHeap.peek()<maxHeap.peek()){
-            minHeap.offer(maxHeap.poll());
+        if (maxHeap.size() - minHeap.size() > 1) {
+            minHeap.add(maxHeap.poll());
+        } else if (!minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()) {
+            minHeap.add(maxHeap.poll());
+            maxHeap.add(minHeap.poll());
         }
-        if(minHeap.size()-maxHeap.size()>1){
-            maxHeap.offer(minHeap.poll());
-        }
-        
     }
+
     
     public double findMedian() {
-        if(maxHeap.size()==minHeap.size()){
-            return (double)(maxHeap.peek()+minHeap.peek())/2;
+        
+        if(minHeap.size()==maxHeap.size()){
+            return (minHeap.peek()+maxHeap.peek())/2.0;
         }
-        else if(maxHeap.size()>minHeap.size()){
-            return (double)maxHeap.peek();
+        else if(minHeap.size()>maxHeap.size()){
+            return minHeap.peek();
         }
-        else{
-            return (double)minHeap.peek();
-        }
+        return maxHeap.peek();
     }
 }
 
