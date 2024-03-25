@@ -1,44 +1,31 @@
 class Solution {
     public boolean exist(char[][] board, String word) {
-        
-        char first=word.charAt(0);
-        boolean visited[][]=new boolean[board.length][board[0].length];
-        for(int i=0;i<board.length;i++){
-            for(int j=0;j<board[0].length;j++){
-                if(first==board[i][j]){
-                    if (backtrack(board,i,j,word,visited,0)){
-                        return true;
-                    }
-                }
-                
+      
+        int row=board.length;
+        int col=board[0].length;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(dfs(board,word,new HashSet<String>(),0,i,j,row,col))return true;
                 
             }
         }
         return false;
         
+        
     }
-    boolean backtrack(char[][]board,int i,int j,String word,boolean visited[][],int index){
-        if(index==word.length())
-            return true;
-        if(i<0||j<0||i>board.length-1||j>board[0].length-1||visited[i][j]){
-            return false;
-        }
-        if(board[i][j]!=word.charAt(index)){
-            return false;
-        }
-        
-        visited[i][j]=true;
-        boolean store=backtrack(board,i,j+1,word,visited,index+1)|
-                        backtrack(board,i,j-1,word,visited,index+1)|
-                        backtrack(board,i-1,j,word,visited,index+1)|
-                        backtrack(board,i+1,j,word,visited,index+1);
-        if(store){
+    boolean dfs(char[][]board,String word,HashSet<String>hash,int index,int i,int j,int row,int col){
+        if(index==word.length()){
             return true;
         }
-        visited[i][j]=false;
-        return false;
+        if(j<0||i<0||i>=row||j>=col||hash.contains(i+" "+j)||board[i][j]!=word.charAt(index))
+            return false;
         
-        
-        
+        hash.add(i+" "+j);
+        boolean ans=dfs(board, word,hash,index+1,i-1,j,row,col)||
+        dfs(board, word,hash,index+1,i+1,j,row,col)||
+        dfs(board, word,hash,index+1,i,j-1,row,col)||
+        dfs(board, word,hash,index+1,i,j+1,row,col);
+        hash.remove(i+" "+j);
+        return ans;
     }
 }
