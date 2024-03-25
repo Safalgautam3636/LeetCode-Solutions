@@ -1,25 +1,22 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-         List<List<Integer>>ans=new ArrayList<>();
-        List<Integer>current=new ArrayList<>();
-        for(int x:nums){
-            current.add(x);
-        }
-        backtrack(current,new ArrayList<>(),ans);
+        List<List<Integer>>ans=new ArrayList<>();
+        dfs(nums,ans,new ArrayList<>(),0);
         return ans;
     }
-    void backtrack(List<Integer>input,List<Integer>subans,List<List<Integer>>ans){
-        if(input.size()==0){
-            ans.add(new ArrayList(subans));
+    void dfs(int[]nums,List<List<Integer>>ans,List<Integer>temp,int index){
+        if(temp.size()==nums.length){
+            ans.add(new ArrayList<>(temp));
             return;
         }
-        for(int i=0;i<input.size();i++){
-            List<Integer>listx=new ArrayList(subans);
-            listx.add(input.get(i));
-            List<Integer>list1=new ArrayList(input.subList(0,i));
-            list1.addAll(new ArrayList(input.subList(i+1,input.size())));
-            backtrack(list1,listx,ans);
-            // subans.remove(subans.size()-1);
+        for(int i=0;i<nums.length;i++){
+            
+            if(temp.contains(nums[i]))
+                continue;
+            temp.add(nums[i]);
+            dfs(nums,ans,temp,i+1);
+            temp.remove(temp.size()-1);
+            
         }
     }
 }
