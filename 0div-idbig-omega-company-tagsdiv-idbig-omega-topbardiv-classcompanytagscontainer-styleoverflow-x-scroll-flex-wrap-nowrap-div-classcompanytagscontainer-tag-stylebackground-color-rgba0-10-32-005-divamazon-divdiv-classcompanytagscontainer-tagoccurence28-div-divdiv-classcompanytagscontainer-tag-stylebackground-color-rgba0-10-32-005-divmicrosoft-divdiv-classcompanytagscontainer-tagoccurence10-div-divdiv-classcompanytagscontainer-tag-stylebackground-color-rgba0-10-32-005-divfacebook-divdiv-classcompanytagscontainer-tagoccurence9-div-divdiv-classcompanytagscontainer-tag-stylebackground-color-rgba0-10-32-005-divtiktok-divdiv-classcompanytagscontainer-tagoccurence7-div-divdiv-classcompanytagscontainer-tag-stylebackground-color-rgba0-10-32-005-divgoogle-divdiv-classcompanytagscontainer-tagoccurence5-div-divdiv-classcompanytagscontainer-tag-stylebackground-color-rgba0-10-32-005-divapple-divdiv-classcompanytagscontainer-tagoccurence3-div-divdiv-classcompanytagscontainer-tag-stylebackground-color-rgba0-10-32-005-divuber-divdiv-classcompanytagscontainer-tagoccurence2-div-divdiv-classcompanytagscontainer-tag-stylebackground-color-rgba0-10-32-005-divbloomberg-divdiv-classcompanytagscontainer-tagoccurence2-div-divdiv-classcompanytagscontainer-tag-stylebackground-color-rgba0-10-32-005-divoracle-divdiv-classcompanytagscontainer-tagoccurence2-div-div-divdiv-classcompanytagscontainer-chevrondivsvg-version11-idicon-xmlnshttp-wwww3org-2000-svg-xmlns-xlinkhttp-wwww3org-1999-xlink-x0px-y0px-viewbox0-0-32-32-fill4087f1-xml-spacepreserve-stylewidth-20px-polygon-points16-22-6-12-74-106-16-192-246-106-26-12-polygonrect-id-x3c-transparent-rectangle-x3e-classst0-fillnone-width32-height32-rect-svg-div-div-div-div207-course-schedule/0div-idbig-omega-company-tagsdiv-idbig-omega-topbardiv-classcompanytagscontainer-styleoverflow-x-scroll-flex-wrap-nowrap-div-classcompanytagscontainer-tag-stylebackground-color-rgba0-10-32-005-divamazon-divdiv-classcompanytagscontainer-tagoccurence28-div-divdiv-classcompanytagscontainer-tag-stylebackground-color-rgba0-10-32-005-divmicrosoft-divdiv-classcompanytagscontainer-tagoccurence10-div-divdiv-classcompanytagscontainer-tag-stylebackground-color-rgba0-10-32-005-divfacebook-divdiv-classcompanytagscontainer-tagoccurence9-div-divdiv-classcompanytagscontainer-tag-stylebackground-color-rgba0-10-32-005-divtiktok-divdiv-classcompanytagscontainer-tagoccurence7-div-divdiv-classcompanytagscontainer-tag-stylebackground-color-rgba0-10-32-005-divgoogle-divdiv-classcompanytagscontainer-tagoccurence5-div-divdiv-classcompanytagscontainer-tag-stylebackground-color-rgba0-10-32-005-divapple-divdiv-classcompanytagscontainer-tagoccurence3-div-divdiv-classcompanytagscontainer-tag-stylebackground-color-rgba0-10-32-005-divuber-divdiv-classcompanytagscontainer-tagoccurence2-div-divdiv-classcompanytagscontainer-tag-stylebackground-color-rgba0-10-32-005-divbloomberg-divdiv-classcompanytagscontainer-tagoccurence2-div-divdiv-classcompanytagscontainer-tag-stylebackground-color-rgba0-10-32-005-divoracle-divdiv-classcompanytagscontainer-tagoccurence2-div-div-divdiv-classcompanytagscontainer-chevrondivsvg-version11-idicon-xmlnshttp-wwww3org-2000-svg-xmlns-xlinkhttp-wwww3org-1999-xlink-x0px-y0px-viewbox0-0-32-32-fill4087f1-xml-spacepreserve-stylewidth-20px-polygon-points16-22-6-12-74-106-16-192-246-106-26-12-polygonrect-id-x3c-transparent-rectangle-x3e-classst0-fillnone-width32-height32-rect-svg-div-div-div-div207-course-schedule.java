@@ -1,35 +1,33 @@
 class Solution {
-    boolean dfsCheck(int node, List<List<Integer>> adj, boolean[] vis, boolean[] path) {
-        vis[node] = true;
-        path[node] = true;
-        for (int it : adj.get(node)) {
-            if (!vis[it]) {
-                if (dfsCheck(it, adj, vis, path))
-                    return true;
-            } else if (path[it]) {
+    boolean dfs(boolean visited[],boolean pathVisited[],int i,List<List<Integer>>adj){
+        visited[i]=true;
+        pathVisited[i]=true;
+        for(int n:adj.get(i)){
+            if(!visited[n]){
+                if(dfs(visited,pathVisited,n,adj))return true;
+            }
+            else if(pathVisited[n]){
                 return true;
             }
         }
-        path[node] = false;
+        pathVisited[i]=false;
         return false;
     }
-
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < numCourses; i++) {
-            adj.add(new ArrayList<>());
+        List<List<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<numCourses;i++){
+            adj.add(new ArrayList());
         }
-
-        for (int[] prereq : prerequisites) {
-            adj.get(prereq[0]).add(prereq[1]);
+        for(int[] p:prerequisites){
+            adj.get(p[0]).add(p[1]);
         }
-
-        boolean[] vis = new boolean[numCourses];
-        boolean[] path = new boolean[numCourses];
-        for (int i = 0; i < numCourses; i++) {
-            if (!vis[i]) {
-                if (dfsCheck(i, adj, vis, path))
+        boolean visited[]=new boolean[numCourses];
+        boolean pathVisited[]=new boolean[numCourses];
+        for(int i=0;i<numCourses;i++){
+            if(!visited[i]){
+                if(dfs(visited,pathVisited,i,adj)){
                     return false;
+                }
             }
         }
         return true;
